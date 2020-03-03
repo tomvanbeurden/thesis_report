@@ -1,0 +1,172 @@
+%% Package enlightening:
+%% a4wide       for make the vertical margins smaller
+%% europs       for typing the euro symbol
+%% graphicx     for inserting figures,graphs,photo's
+%% fancyhdr     for creating a prettier header/footer
+%% moreverb     for inserting source code better
+%% subfigure    for allowing multiple figures/tables in one enviroment
+%% float        Place figures HERE with the [H] option
+%% amsmath      for more math
+%% booktabs     for nicer tables (\toprule, etc)
+%% babel        for "english" hyphenation and other textual styles.
+%% hyperref     for creating clickable links and the bookmarksmenu
+%% ifpdf        for making the code latex and pdflatex compatible
+%% psfrag       for replacing text in eps graphics
+%% pdfrack      for replacing text in pdf graphics "bash needed!"
+%% caption      for changing the properties (font) of the caption
+%% setspace     reduce linespacing in the TOC or Bib \begin{spacing}{0.9} ...
+%% listings     for formatting Matlab code
+%% lipsum       for creating dummy text (Lorem ipsum dolor sit amet...)
+%% soul         for highlighting text \hl{}
+%% xspace       for putting or removing a space for \newcommand macro's
+%% caption      for changing font size and alignment of captions
+
+\documentclass[10pt,a4paper]{article}
+\author{Tom van Beurden (author)}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{float}
+\usepackage{url}
+\usepackage[english]{babel}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{a4wide}
+\numberwithin{equation}{section}
+\parindent=0pt
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{epstopdf}
+\usepackage[normalem]{ulem} %For strikethrough text (use\sout{})
+%\usepackage{appendix}
+\usepackage{enumerate}   
+
+%% fixing the standard latex indentation style on new alinea.
+\setlength{\parskip}{0ex}
+\setlength{\parindent}{0mm}
+
+%% extra document related shortcuts
+\newcommand{\degree}{\ensuremath{^{\circ}}\xspace}
+\newcommand{\HRule}{\rule{--\linewidth}{0.5mm}}
+
+
+%% Make your own math operators (assembly operator)
+\newcommand{\Aop}{\mathop{\vphantom{\sum}\mathchoice
+  {\vcenter{\hbox{\huge A}}}
+  {\vcenter{\hbox{\Large A}}}{\mathrm{A}}{\mathrm{A}}}\displaylimits}
+
+% Enable equation, figure and table numbering per chapter
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+\usepackage{listings}
+%\lstset{
+%    language=Matlab,
+%    basicstyle=\color{black}\ttfamily\footnotesize,
+%    numbers=left,
+%    numberstyle=\tiny\color{gray},    
+%    stepnumber=1,                 
+%    numbersep=5pt,               
+%    commentstyle=\color{dkgreen}\itshape\ttfamily,
+%    keywordstyle=\color{black}\ttfamily\footnotesize,
+%    showstringspaces=false,
+%    frame=single,
+%    backgroundcolor=\color{white},
+%    keywordstyle=\color{blue}
+%}
+% load package with ``framed'' and ``numbered'' option.
+
+%%TOM COMMENTED OUT
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+
+\usepackage{epsfig}   % To include Matlab figures
+%\usepackage{arydshln} % Dashed lines
+%\usepackage{wasysym}  % Diameter symbol
+\usepackage{graphicx} % To be able to edit graphics
+\usepackage{multirow} % to be able to use merged cells in tables
+%\usepackage[latin1]{inputenc} % to be able to type things like �, �, � and �.
+
+% To include a PDF-file to Latex
+% \includegraphics{myfig.pdf}
+% \includegraphics[width=60mm]{myfig.png}
+% \includegraphics[height=60mm]{myfig.jpg}
+% \includegraphics[scale=0.75]{myfig.pdf}
+% \includegraphics[angle=45,width=52mm]{myfig.jpg}
+
+
+% Nicer lists
+\newenvironment{packed_item}{
+\begin{itemize}
+  \vspace*{0em}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+%\newenvironment{packed_enumerate}{
+%\begin{enumerate}
+%  \vspace*{0em}
+%  \setlength{\itemsep}{0pt}
+%  \setlength{\parskip}{0pt}
+%  \setlength{\parsep}{0pt}
+%}{\end{enumerate}}
+
+%\newenvironment{packed_enumerate2}{
+%\renewcommand{\labelenumi}{\Alph{enumi}}
+%\begin{enumerate}
+%  \vspace*{0em}
+%  \setlength{\itemsep}{0pt}
+%  \setlength{\parskip}{0pt}
+%  \setlength{\parsep}{0pt}
+%}{\end{enumerate}}
+
+% Break rules in Matlab code
+\lstset{breaklines=true}
+
+\newcommand{\nocontentsline}[3]{}                                                   %Zorgt ervoor dat je met het command \tocless kunt zorgen dat bijv. een section
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}  %niet in de TableOfContent wordt opgenomen, maar de nummerig wel doorloopt. 
+
+\captionsetup[subfigure]{justification=justified,singlelinecheck=false}
+
+% MATLAB CODE into Latex
+\usepackage{listings}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+
+% Special accents
+\def\accbullet#1{\overset{
+\hskip0pt % add 2 or 3 pt if you change \text{#1} to #1 to use italics 
+\raisebox{0.1ex}[0ex][0ex]{%   
+$_{\bullet}$%
+}}{{#1}}}
+\def\acctriang#1{\overset{
+\hskip0pt % add 2 or 3 pt if you change \text{#1} to #1 to use italics 
+\raisebox{0.6ex}[0ex][0ex]{%   
+$_{\bigtriangledown}$%
+}}{{#1}}}
+\def\accdiamond#1{\overset{
+\hskip0pt % add 2 or 3 pt if you change \text{#1} to #1 to use italics 
+\raisebox{0.6ex}[0ex][0ex]{%   
+$_{\Diamond}$%
+}}{{#1}}}
+
+\usepackage{comment}
+
+
+\usepackage{amssymb}
+\usepackage{bm} % for \bm
+\usepackage{fixmath} % for \mathbold
+\usepackage{scalerel}
+\newlength\bshft
+\bshft=.18pt\relax
+\def\fakebold#1{\ThisStyle{\ooalign{$\SavedStyle#1$\cr%
+  \kern-\bshft$\SavedStyle#1$\cr%
+  \kern\bshft$\SavedStyle#1$}}}
+  
+  

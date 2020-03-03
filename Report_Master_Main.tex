@@ -1,0 +1,42 @@
+\input{./Layout/layout.tex}
+
+\begin{document}
+
+%\input{./0.0.layout/layout_chapters.tex}
+
+\input{./Titlepage/titlepage.tex}
+%set(0, 'defaultTextInterpreter', 'latex');                                  % Set LaTeX text interpretation
+\newpage
+\thispagestyle{empty}
+\input{./Abstract/abstract.tex}
+\newpage
+\thispagestyle{empty}
+\thispagestyle{empty}
+\setcounter{tocdepth}{3} %2-show subsections/3-show subsubsections
+\renewcommand{\contentsname}{Contents}
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+%\input{./Introduction/Introduction.tex}
+%\newpage
+\input{./Chapter1/Chapter1.tex}
+\newpage
+\input{./Chapter2/Chapter2.tex}
+\newpage
+\input{./Chapter3/Chapter3.tex}
+\newpage
+\input{./Chapter4/Chapter4.tex}
+\newpage
+\input{./Chapter5/Chapter5.tex}
+\newpage
+\input{./Chapter6/Chapter6.tex}
+\newpage
+\input{./References/References.tex}
+\newpage
+\input{./AppendixA/AppendixA.tex}
+%\newpage
+%\input{./AppendixB/AppendixB.tex}
+\end{document} 
+
+%importing a ML script \lstinputlisting{name.m}

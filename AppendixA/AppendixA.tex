@@ -1,0 +1,287 @@
+\section*{Appendix A: Objective rate tensors}
+\setcounter{table}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+\renewcommand{\theequation}{A.\arabic{equation}}
+\renewcommand{\thefigure}{A.\arabic{figure}}
+\addcontentsline{toc}{section}{\protect\numberline{}Appendix A: Objective rate tensors}%
+
+\subsection*{A.1 Lie-derivative of Cauchy stress tensor}
+\addcontentsline{toc}{subsection}{\protect\numberline{}A.1: Lie-derivative of Cauchy stress tensor}%
+The Lie-derivative of the Cauchy stress tensor can be obtained by the pull-back push-forward procedure, defined by the following three steps:
+\begin{enumerate}
+    \item Pull-back: The stress tensor is transformed to the undeformed configuration.
+    \item The time derivative of the stress in this configuration is calculated.
+    \item Push-forward: The time derivative of the stress is mapped to the current configuration.
+\end{enumerate}
+These three steps will be detailed below.\\
+\newline
+First, the Cauchy stress tensor $\boldsymbol{\sigma}$ is mapped back to the undeformed configuration. This can be done by using the inverse of the deformation gradient tensor $\boldsymbol{F}$. This transformed stress will be called $\bar{\boldsymbol{\sigma}}$, and is defined as:
+\begin{equation}\label{AppA_sigmabar}
+\bar{\boldsymbol{\sigma}} = \boldsymbol{F}^{-1}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{F}^{-T}
+\end{equation}
+
+Next, the time derivative of the stress in the undeformed configuration is calculated. It will be denoted by the symbol $\dot{\bar{\boldsymbol{\sigma}}}$, and is calculated by:
+\begin{equation}
+\dot{\bar{\boldsymbol{\sigma}}} = \frac{d}{dt}\big(\boldsymbol{F}^{-1}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{F}^{-T}\big)
+\end{equation}
+
+In the third step, this time derivative is transformed to the current configuration to arrive at the Lie-derivative, which we will denote with the symbol $\acctriang{\boldsymbol{\sigma}}$. We apply a transformation with $\boldsymbol{F}$ as follows:
+\begin{equation}
+\acctriang{\boldsymbol{\sigma}} = \boldsymbol{F}\cdot\Big[\frac{d}{dt}\big(\boldsymbol{F}^{-1}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{F}^{-T}\big)\Big]\cdot\boldsymbol{F}^T
+\end{equation}
+
+The expression can be simplified as follows:
+\begin{equation}\label{AppA_lieproof}
+\begin{split}
+\acctriang{\boldsymbol{\sigma}} &= \boldsymbol{F}\cdot\Big[\frac{d}{dt}\big(\boldsymbol{F}^{-1}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{F}^{-T}\big)\Big]\cdot\boldsymbol{F}^T\\
+&= \boldsymbol{F}\cdot\Big[\dot{\boldsymbol{F}}^{-1}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{F}^{-T}+\boldsymbol{F}^{-1}\cdot\dot{\boldsymbol{\sigma}}\cdot\boldsymbol{F}^{-T}+\boldsymbol{F}^{-1}\cdot\boldsymbol{\sigma}\cdot\dot{\boldsymbol{F}}^{-T}\Big]\cdot\boldsymbol{F}^T\\
+&= \boldsymbol{F}\cdot\dot{\boldsymbol{F}}^{-1}\cdot\boldsymbol{\sigma}+\dot{\boldsymbol{\sigma}}+\boldsymbol{\sigma}\cdot\dot{\boldsymbol{F}}^{-T}\cdot\boldsymbol{F}^T.
+\end{split}
+\end{equation}
+This can be further reduced by stating:
+\begin{equation}
+\boldsymbol{F}\cdot\boldsymbol{F}^{-1}=\boldsymbol{I}.
+\end{equation}
+Taking the time derivative of both sides leads to:
+\begin{equation}
+\frac{d}{dt}(\boldsymbol{F}\cdot\boldsymbol{F}^{-1})=\boldsymbol{0} \quad\text{thus}\quad \dot{\boldsymbol{F}}\cdot\boldsymbol{F}^{-1} + \boldsymbol{F}\cdot\dot{\boldsymbol{F}}^{-1} = \boldsymbol{0}.
+\end{equation}
+With the definition of the velocity gradient tensor $\boldsymbol{L}=\dot{\boldsymbol{F}}\cdot\boldsymbol{F}^{-1}$ the following two expressions can be found:
+\begin{equation}
+\dot{\boldsymbol{F}}^{-1} = -\boldsymbol{F}^{-1}\cdot\boldsymbol{L} \quad\text{and}\quad \dot{\boldsymbol{F}}^{-T} = -\boldsymbol{F}^{-1}\cdot\boldsymbol{F}^{-T}
+\end{equation}
+By substituting this in the result of Equation \ref{AppA_lieproof} we can reduce the expression for the Lie-derivative of the Cauchy stress tensor further to:
+\begin{equation}
+\acctriang{\boldsymbol{\sigma}}=\dot{\boldsymbol{\sigma}}-\boldsymbol{L}\cdot\boldsymbol{\sigma}+-\boldsymbol{\sigma}\cdot\boldsymbol{L}
+\end{equation}
+
+
+\subsection*{A.2 Derivation of objective constitutive equation}
+\addcontentsline{toc}{subsection}{\protect\numberline{}A.2: Derivation of objective constitutive equation}%
+The derivation of the objective constitutive equation that is described in this appendix is based on Chapter 8 of Chaves \cite{chaves}. In this derivation, the pull-back push-forward procedure that is described in Appendix A.1 will be followed. Therefore, the symbols $\bar{\boldsymbol{\sigma}}$, $\dot{\bar{\boldsymbol{\sigma}}}$ and $\acctriang{\boldsymbol{\sigma}}$ represent the same stress or stress derivative definitions as in Appendix A.1.\\
+\newline
+To find a suitable constitutive relation in rate format, we start by the general form of linearised material behaviour as defined in the undeformed configuration, including the 2nd Piola-Kirchhoff stress $\boldsymbol{S}$, the material stiffness tensor $\boldsymbol{\mathbb C}$ and the Green-Lagrange strain $\boldsymbol{E}$. The general form is given by:
+\begin{equation}\label{AppA_PK}
+\boldsymbol{S} = \boldsymbol{\mathbb C}:\boldsymbol{E}.
+\end{equation}
+The 2nd Piola-Kirchhoff stress relates to the Cauchy stress tensor by:
+\begin{equation}
+\boldsymbol{S} = J\;\boldsymbol{F}^{-1}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{F}^{-T}.
+\end{equation}
+In which $J$ is the volume ratio defined as $J=\text{det}(\boldsymbol{F})$.         Substituting this expression in the general form, and solving for the Cauchy stress tensor leads to:
+\begin{equation}\label{AppA_cauchy}
+\boldsymbol{\sigma} = \frac{1}{J}\;\boldsymbol{F}\cdot(\boldsymbol{\mathbb C}:\boldsymbol{E})\cdot\boldsymbol{F}^T.
+\end{equation}
+With this expression for $\sigma$, the pull-back push-forward procedure as described in Appendix A.1 will be performed.\\
+First, a pull-back can be applied by transforming this expression for the Cauchy stress to the undeformed configuration using the inverse of $\boldsymbol{F}$. Similar to Equation \ref{AppA_sigmabar}, this transformed stress will be called $\bar{\boldsymbol{\sigma}}$. It can be calculated by:
+\begin{equation}
+\bar{\boldsymbol{\sigma}} = \boldsymbol{F}^{-1}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{F}^{-T} = \frac{1}{J}\;(\boldsymbol{\mathbb C}:\boldsymbol{E}).
+\end{equation}
+This expression resembles Equation \ref{AppA_PK} for the 2nd Piola-Kirchhoff stress, only the $1/J$ term is added here. This was to be expected since the 2nd Piola-Kirchhoff stress $\boldsymbol{S}$ is defined as the Kirchhoff stress $\boldsymbol{\tau}(=J\boldsymbol{\sigma})$ mapped back to the undeformed configuration. Since the goal of this derivation is to end up with an expression in terms of the Cauchy stress, we will continue with this expression.\\
+\newline
+According to the second step of the pull-back push-forward procedure, the time derivative of the transformed stress must be calculated. This time derivative will be called $\dot{\bar{\boldsymbol{\sigma}}}$, and is defined as:
+
+\begin{equation}
+\begin{split}
+\dot{\bar{\boldsymbol{\sigma}}} &= \frac{d}{dt}\big[\frac{1}{J}\;(\boldsymbol{\mathbb C}:\boldsymbol{E})\big]\\
+&= -\frac{\dot{J}}{J^2}\;(\boldsymbol{\mathbb C}:\boldsymbol{E}) + \frac{1}{J}\;(\boldsymbol{\mathbb C}:\dot{\boldsymbol{E}})
+\end{split}
+\end{equation}
+
+This expression can be rewritten by introducing the following definitions:
+\begin{equation}
+\text{tr}(\boldsymbol{D}) = \frac{\dot{J}}{J} \quad\text{and}\quad \dot{\boldsymbol{E}}=\boldsymbol{F}^T\cdot\boldsymbol{D}\cdot\boldsymbol{F}
+\end{equation}
+The expression for $\dot{\bar{\boldsymbol{\sigma}}}$ then becomes:
+\begin{equation}
+\dot{\bar{\boldsymbol{\sigma}}} = -\text{tr}(\boldsymbol{D})\frac{1}{J}\;(\boldsymbol{\mathbb C}:\boldsymbol{E}) + \frac{1}{J}\;\Big(\boldsymbol{\mathbb C}:(\boldsymbol{F}^T\cdot\boldsymbol{D}\cdot\boldsymbol{F})\Big).
+\end{equation}
+In the third step, this time derivative is transformed to the current configuration to arrive at the Lie-derivative, which we will again denote with the symbol $\acctriang{\boldsymbol{\sigma}}$. We apply a transformation with $\boldsymbol{F}$ as follows:
+\begin{equation}\label{AppA_rateinterm1}
+\begin{split}
+\acctriang{\boldsymbol{\sigma}} &= \boldsymbol{F}\cdot \dot{\bar{\boldsymbol{\sigma}}} \cdot\boldsymbol{F}^T\\
+&= -\text{tr}(\boldsymbol{D})\underbrace{\frac{1}{J}\;\boldsymbol{F}\cdot(\boldsymbol{\mathbb C}:\boldsymbol{E})\cdot\boldsymbol{F}^T}_{\boldsymbol{\sigma}} + \frac{1}{J}\;\boldsymbol{F}\cdot\Big(\boldsymbol{\mathbb C}:(\boldsymbol{F}^T\cdot\boldsymbol{D}\cdot\boldsymbol{F})\Big)\cdot\boldsymbol{F}^T.
+\end{split}
+\end{equation}
+In the first term on the right hand side, the expression for the Cauchy stress as given in Equation \ref{AppA_cauchy} can be recognized. The second term on the right hand side can be rewritten as:
+\begin{equation}
+\begin{split}
+\frac{1}{J}\;\boldsymbol{F}\cdot\Big(\boldsymbol{\mathbb C}:(\boldsymbol{F}^T\cdot\boldsymbol{D}\cdot\boldsymbol{F})\Big)\cdot\boldsymbol{F}^T &= \frac{1}{J}\;(\boldsymbol{F}\overline{\otimes}\boldsymbol{F}):\boldsymbol{\mathbb C}:(\boldsymbol{F}^T\underline{\otimes}\boldsymbol{F}^T):\boldsymbol{D}, \\
+&= \frac{1}{J}\; \boldsymbol{\mathbb L}:\boldsymbol{D},
+\end{split}
+\end{equation}
+in which $\boldsymbol{\mathbb L}$ is the spatial elasticity tensor as defined in Equation \ref{Ch3_CL}.\\
+\newline
+Thus, the expression in Equation \ref{AppA_rateinterm1} can be rewritten as:
+\begin{equation}
+\acctriang{\boldsymbol{\sigma}} = -\text{tr}(\boldsymbol{D})\boldsymbol{\sigma} + \frac{1}{J}\; \boldsymbol{\mathbb L}:\boldsymbol{D}.
+\end{equation}
+Since the term with $\text{tr}(\boldsymbol{D})$ is negligibly small in most cases, this term will be neglected. With this assumption, we find a constitutive rate equation of the form:
+\begin{equation}\label{AppA_consteq1}
+\acctriang{\boldsymbol{\sigma}} = \frac{1}{J}\; \boldsymbol{\mathbb L}:\boldsymbol{D}.
+\end{equation} 
+Or, with plasticity included, it becomes:
+\begin{equation}\label{AppA_consteq}
+\acctriang{\boldsymbol{\sigma}} = \frac{1}{J}\; \boldsymbol{\mathbb L}:(\boldsymbol{D}-\boldsymbol{D}^p).
+\end{equation} 
+
+\newpage
+\subsection*{A.3 Incremental stress integration}
+\addcontentsline{toc}{subsection}{\protect\numberline{}A.3: Incremental stress integration}%
+For application in a numerical code, an incremental integration of the constitutive rate equation of \ref{AppA_consteq} needs to be performed to obtain the Cauchy stress. To compose an incremental integration, we will make use of the mid-point rule as described in De Souza Neto et al.\cite{compmethodsplasticity}{\color{red}{check this reference}}.\\ 
+\newline
+We start with defining a discrete time interval $[t_n, t_{n+1}]$, with a length of $\Delta t$. The deformation gradients $\boldsymbol{F}_n$ and $\boldsymbol{F}_{n+1}$ describe the transformation from the undeformed configuration to the configurations at $t_n$ and $t_{n+1}$ respectively. At the beginning of the interval, the stress state is defined as $\boldsymbol{\sigma}_n$, and at the end of the interval the stress state is defined as $\boldsymbol{\sigma}_{n+1}$.\\
+\newline
+With the stress states $\boldsymbol{\sigma}_n$ and $\boldsymbol{\sigma}_{n+1}$ we can calculate the derivative of the Cauchy stress in the mid-point of the time interval, at $t_{n+\frac{1}{2}}$, as follows:
+{\begin{equation}\label{AppB_incrderr1}
+\dot{{\boldsymbol{\sigma}}}_{n+\frac{1}{2}}=\frac{{\boldsymbol{\sigma}}_{n+1}-{\boldsymbol{\sigma}}_{n}}{\Delta t},
+\end{equation}
+with $\Delta t$ approaching $0$.
+However, we are using the Lie-derivative of the Cauchy stress tensor in stead of the regular time derivative. The Lie-derivative is obtained by the pull-back push-forward procedure as described in Appendix A. The first step of the pull-back procedure for the Lie-derivative is to transform the stress to the undeformed configuration. We define these transformed stresses at time $t_n$ and $t_{n+1}$ as:
+\begin{equation}
+\left.\begin{aligned}
+\bar{\boldsymbol{\sigma}}_{n+1} &=\boldsymbol{F}_{n+1}^{-1}\cdot\boldsymbol{\sigma}_{n+1}\cdot\boldsymbol{F}_{n+1}^{-T}\\
+\bar{\boldsymbol{\sigma}}_{n} &= \boldsymbol{F}^{-1}_{n}\cdot\boldsymbol{\sigma}_{n}\cdot\boldsymbol{F}_{n}^{-T},
+\end{aligned}\right.
+\label{Ch3_stressbar}
+\end{equation}
+with the bar above the symbol denoting that it has been transformed to the undeformed configuration.\\
+\newline
+The second step in the pull-back push-forward procedure is to take the time derivative in this transformed state. This can be approximated in a similar way as in Equation \ref{AppB_incrderr1}, only now with bars over the tensor symbols, denoting that the tensors live in the undeformed configuration.
+{\begin{equation}\label{AppA_derr_reference}
+\dot{\bar{\boldsymbol{\sigma}}}_{n+\frac{1}{2}}=\frac{\bar{\boldsymbol{\sigma}}_{n+1}-\bar{\boldsymbol{\sigma}}_{n}}{\Delta t}.
+\end{equation}
+From Appendix A.1 we know that the Lie-derivative $\acctriang{\boldsymbol{\sigma}}$ is the push-forward of the derivative in the undeformed configuration $\dot{\bar{\boldsymbol{\sigma}}}$, as defined by:
+\begin{equation}
+\acctriang{\boldsymbol{\sigma}} =  \boldsymbol{F}\cdot\dot{\bar{\boldsymbol{\sigma}}}\cdot\boldsymbol{F}^{T}.
+\end{equation}
+Using this relation in combination with the expression in Equation \ref{AppA_derr_reference}, the value of the Lie-derivative at $t_{n+\frac{1}{2}}$ can be approximated by:
+\begin{equation}
+\begin{split}
+\acctriang{\boldsymbol{\sigma}}_{n+\frac{1}{2}} &= \boldsymbol{F}_{n+\frac{1}{2}}\cdot\dot{\bar{\boldsymbol{\sigma}}}_{n+\frac{1}{2}}\cdot\boldsymbol{F}_{n+\frac{1}{2}}^{T}\\
+&=\boldsymbol{F}_{n+\frac{1}{2}}\cdot\Big[\frac{\bar{\boldsymbol{\sigma}}_{n+1}-\bar{\boldsymbol{\sigma}}_{n}}{\Delta t}\Big]\cdot\boldsymbol{F}_{n+\frac{1}{2}}^{T}.
+\end{split}
+\end{equation}
+Using the constitutive law of Equation \ref{AppA_consteq1}, it can also be stated that:
+\begin{equation}
+\acctriang{\boldsymbol{\sigma}}_{n+\frac{1}{2}} = \frac{1}{J_{n+\frac{1}{2}}}\; \boldsymbol{\mathbb L}:\boldsymbol{D}_{n+\frac{1}{2}}.
+\end{equation} 
+Combining the last two relations, it can be stated that:
+\begin{equation}\label{AppA_newstress1}
+\boldsymbol{F}_{n+\frac{1}{2}}\cdot\Big[\frac{\bar{\boldsymbol{\sigma}}_{n+1}-\bar{\boldsymbol{\sigma}}_{n}}{\Delta t}\Big]\cdot\boldsymbol{F}_{n+\frac{1}{2}}^{T} = \frac{1}{J_{n+\frac{1}{2}}}\; \boldsymbol{\mathbb L}:\boldsymbol{D}_{n+\frac{1}{2}}
+\end{equation}
+From Chaves \cite{chaves}, we know that:
+\begin{equation}
+\boldsymbol{\mathbb L}:\boldsymbol{D} = \boldsymbol{F}\cdot\boldsymbol{\mathbb C}:\boldsymbol{F}^T\cdot\boldsymbol{D}\cdot\boldsymbol{F}\cdot\boldsymbol{F}^T
+\end{equation}
+Substituting this in \ref{AppA_newstress1} gives:
+\begin{equation}
+\boldsymbol{F}_{n+\frac{1}{2}}\cdot\Big[\frac{\bar{\boldsymbol{\sigma}}_{n+1}-\bar{\boldsymbol{\sigma}}_{n}}{\Delta t}\Big]\cdot\boldsymbol{F}_{n+\frac{1}{2}}^{T} = \frac{1}{J_{n+\frac{1}{2}}}\; \boldsymbol{F}_{n+\frac{1}{2}}\cdot\boldsymbol{\mathbb C}:\boldsymbol{F}_{n+\frac{1}{2}}^T\cdot\boldsymbol{D}_{n+\frac{1}{2}}\cdot\boldsymbol{F}_{n+\frac{1}{2}}\cdot\boldsymbol{F}_{n+\frac{1}{2}}^T.
+\end{equation}
+Pre- and post-multiplying both sides by $\boldsymbol{F}_{n+\frac{1}{2}}^{-1}$ and $\boldsymbol{F}_{n+\frac{1}{2}}^{-T}$ gives:
+\begin{equation}
+\frac{\bar{\boldsymbol{\sigma}}_{n+1}-\bar{\boldsymbol{\sigma}}_{n}}{\Delta t}= \frac{1}{J_{n+\frac{1}{2}}}\; \boldsymbol{\mathbb C}:\boldsymbol{F}_{n+\frac{1}{2}}^T\cdot\boldsymbol{D}_{n+\frac{1}{2}}\cdot\boldsymbol{F}_{n+\frac{1}{2}}
+\end{equation}
+
+
+
+
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+Let us apply this transformation to both sides of the constitutive Equation of \ref{AppB_consteq}:
+\begin{equation}
+\boldsymbol{F}^{-1}\cdot\acctriang{\boldsymbol{\sigma}}\cdot\boldsymbol{F}^{-T} = \frac{1}{J}\; \boldsymbol{F}^{-1}\cdot(\boldsymbol{\mathbb L}:\boldsymbol{D})\cdot\boldsymbol{F}^{-T}.
+\end{equation} 
+
+Substituting the relation between $\boldsymbol{D}$ and $\dot{\boldsymbol{E}}$ given by:
+\begin{equation}
+\boldsymbol{D} = \boldsymbol{F}^{-T}\cdot\dot{\boldsymbol{E}}\cdot\boldsymbol{F}^{-1},
+\end{equation}
+leads to:
+\begin{equation}
+\boldsymbol{F}^{-1}\cdot\acctriang{\boldsymbol{\sigma}}\cdot\boldsymbol{F}^{-T} = \frac{1}{J}\; \boldsymbol{F}^{-1}\cdot\Big(\boldsymbol{\mathbb L}:\big(\boldsymbol{F}^{-T}\cdot\dot{\boldsymbol{E}}\cdot\boldsymbol{F}^{-1}\big)\Big)\cdot\boldsymbol{F}^{-T}.
+\end{equation} 
+Also, a part of the term on the right hand side can be rewritten to match the expression for the spatial elasticity tensor $\boldsymbol{\mathbb L}$ that was given in Equation \ref{Ch3_CL}. 
+\begin{equation}
+\frac{1}{J}\; \boldsymbol{F}^{-1}\cdot\Big(\boldsymbol{\mathbb L}:\big(\boldsymbol{F}^{-T}\cdot\dot{\boldsymbol{E}}\cdot\boldsymbol{F}^{-1}\big)\Big)\cdot\boldsymbol{F}^{-T}= \frac{1}{J}\; (\boldsymbol{F}^{-1}\overline{\otimes}\boldsymbol{F}^{-1}):\boldsymbol{\mathbb L}:(\boldsymbol{F}^{-T}\underline{\otimes}\boldsymbol{F}^{-T}):\dot{\boldsymbol{E}}.
+\end{equation}
+Combining the last two relations, it can be stated that:
+
+
+
+
+
+
+
+
+
+ddddddd
+\vspace{4cm}
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\begin{equation}
+\boldsymbol{F}^{-1}\cdot\acctriang{\boldsymbol{\sigma}}\cdot\boldsymbol{F}^{-T} = \frac{1}{J}\; \boldsymbol{\mathbb L}:(\boldsymbol{D}-\boldsymbol{D}^p).
+\end{equation} 
+
+\begin{equation}
+(\boldsymbol{F}^{-1}\overline{\otimes}\boldsymbol{F}^{-1}):\boldsymbol{\mathbb L}:(\boldsymbol{F}^{-T}\underline{\otimes}\boldsymbol{F}^{-T})
+\end{equation}
+The first step of the pull-back push-forward procedure tells us to transform the stress back to a state which is insensitive for rigid body transformations. Since the Lie-derivative is used, this state is the the undeformed (reference) configuration. We perform the transformation to the undeformed configuration by using the deformation gradients $\boldsymbol{F}_n$ and $\boldsymbol{F}_{n+1}$. In the remainder of this appendix, a bar over a symbol denotes that it has been transformed to the undeformed configuration. The Cauchy stresses in the reference configuration become:
+\begin{equation}
+\left.\begin{aligned}
+\bar{\boldsymbol{\sigma}}_{n+1} &=\boldsymbol{F}_{n+1}^{-1}\cdot\boldsymbol{\sigma}_{n+1}\cdot\boldsymbol{F}_{n+1}^{-T}\\
+\bar{\boldsymbol{\sigma}}_{n} &= \boldsymbol{F}^{-1}_{n}\cdot\boldsymbol{\sigma}_{n}\cdot\boldsymbol{F}_{n}^{-T}.
+\end{aligned}\right.
+\label{Ch3_stressbar}
+\end{equation}
+
+The second step of the pull-back push-forward procedure describes that the time derivative of the stress tensor must be calculated in the transformed state.  Based on the work of De Souza Neto et al.\cite{compmethodsplasticity}{\color{red}{check this reference}}, the mid-point rule is used to approximate this time derivative. This means that a time $t_{n+\frac{1}{2}}$ is defined, which is in the middle of the defined time interval.\\
+In this mid-point, we define a deformation gradient tensor $\boldsymbol{F}_{n+\frac{1}{2}}$, calculated through a simple interpolation:
+\begin{equation}
+\boldsymbol{F}_{n+\frac{1}{2}} = \frac{1}{2}(\boldsymbol{F}_{n}+\boldsymbol{F}_{n+1})
+\end{equation}
+At the mid-point, also a rate of deformation tensor can be calculated, given by:
+\begin{equation}
+\boldsymbol{D}_{n+\frac{1}{2}} = \frac{1}{2}(\boldsymbol{L}_{n+\frac{1}{2}}+\boldsymbol{L}_{n+\frac{1}{2}}^T)\quad\text{with}\quad \boldsymbol{L}_{n+\frac{1}{2}} = \frac{\boldsymbol{F}_{n+1}-\boldsymbol{F}_n}{\Delta t}\cdot \boldsymbol{F}_{n+\frac{1}{2}}^{-1}
+\end{equation}
+
+The value of $\dot{\bar{\boldsymbol{\sigma}}}$ in the middle of the time interval can be approximated by:
+{\begin{equation}
+\dot{\bar{\boldsymbol{\sigma}}}_{n+\frac{1}{2}}\approx\frac{\bar{\boldsymbol{\sigma}}_{n+1}-\bar{\boldsymbol{\sigma}}_{n}}{\Delta t}.
+\end{equation}
+
+We know that, by definition, the transformation of the Lie-derivative of the Cauchy stress tensor back to the undeformed configuration will yield $\dot{\bar{\boldsymbol{\sigma}}}$:
+\begin{equation}
+ \dot{\bar{\boldsymbol{\sigma}}}=\boldsymbol{F}^{-1}\cdot\acctriang{\boldsymbol{\sigma}}\cdot\boldsymbol{F}^{-T}.
+\end{equation}
+If we apply this transformation to both sides of the constitutive law of Equation \ref{AppB_consteq}, we find that:
+\begin{equation}
+\boldsymbol{F}^{-1}\cdot\acctriang{\boldsymbol{\sigma}}\cdot\boldsymbol{F}^{-T} = \frac{1}{J}\boldsymbol{\mathbb C}:\dot{\boldsymbol{E}}
+\end{equation}
+
+
+
+The time derivative of the transformed Cauchy stress tensor, $\dot{\bar{\boldsymbol{\sigma}}}$, can be approximated in this mid-point by:
+\begin{equation}
+    \dot{\bar{\boldsymbol{\sigma}}}\approx\frac{\bar{\boldsymbol{\sigma}}_{n+1}-\bar{\boldsymbol{\sigma}}_{n}}{\Delta t} \approx \frac{1}{J_{n+\frac{1}{2}}}\; \bar{\boldsymbol{\mathbb{L}}}:(\bar{\boldsymbol{D}}_{n+\frac{1}{2}}-\bar{\boldsymbol{D}}^p_{n+\frac{1}{2}}),
+    \label{Ch3_sigmabardot}
+\end{equation}
+with the spatial elasticity tensor $\boldsymbol{\mathbb{L}}$ and the rate of deformation tensors $\boldsymbol{D}$ and $\boldsymbol{D}^p$ evaluated at time $t_{n+\frac{1}{2}}$ and mapped back to the reference configuration by:
+\begin{equation}
+\left.\begin{aligned}
+\bar{\boldsymbol{D}}_{n+\frac{1}{2}} =& \;\boldsymbol{F}^{-1}_{n+\frac{1}{2}} \cdot{\boldsymbol{D}}_{n+\frac{1}{2}}\cdot\boldsymbol{F}^{-T}_{n+\frac{1}{2}} \\
+\bar{\boldsymbol{D}}^p_{n+\frac{1}{2}} =& \;\boldsymbol{F}^{-1}_{n+\frac{1}{2}} \cdot{\boldsymbol{D}}^p_{n+\frac{1}{2}}\cdot\boldsymbol{F}^{-T}_{n+\frac{1}{2}} \\
+\bar{\boldsymbol{\mathbb{L}}} =& \;(\boldsymbol{F}^{-1}_{n+\frac{1}{2}}\overline{\otimes}\boldsymbol{F}^{-1}_{n+\frac{1}{2}}):\boldsymbol{\mathbb L}:(\boldsymbol{F}^{-T}_{n+\frac{1}{2}}\underline{\otimes}\boldsymbol{F}^{-T}_{n+\frac{1}{2}}) = \boldsymbol{\mathbb C}.    
+\end{aligned}\right.
+\label{AppB:incrementprop}
+\end{equation}
+From this last transformation, the inverse relation of Equation \ref{Ch3_CL} can be recognized. Thus, we can simply use the material elasticity tensor $\boldsymbol{\mathbb C}$ in stead of the spatial elasticity tensor $\bar{\boldsymbol{\mathbb{L}}}$ in the expression for $\dot{\bar{\boldsymbol{\sigma}}}$.\\
+\newline
+The third and last step of the pull-back push-forward procedure is to transform the time derivative to the current configuration, which is $t_{n+1}$. This transformation is done by pre- and post-multiplying both sides with $\boldsymbol{F}_{n+1}$ and $\boldsymbol{F}^T_{n+1}$ respectively.\\
+Performing this transformation, substituting $\boldsymbol{\mathbb C}_{n+\frac{1}{2}}$ for $\bar{\boldsymbol{\mathbb L}}_{n+\frac{1}{2}}$ and rearranging leads to an expression for the new Cauchy stress defined in the current configuration, given by:
+\begin{equation}
+    {\boldsymbol{\sigma}}_{n+1}\approx\boldsymbol{F}_{n+1}\cdot\Big[\bar{\boldsymbol{\sigma}}_{n}+ \frac{\Delta t}{J_{n+\frac{1}{2}}}\; {\boldsymbol{\mathbb{C}}}:(\bar{\boldsymbol{D}}_{n+\frac{1}{2}}-\bar{\boldsymbol{D}}^p_{n+\frac{1}{2}})\Big]\cdot\boldsymbol{F}^T_{n+1}.
+    \label{Ch3_sigmabarnew}
+\end{equation}
+
+
+

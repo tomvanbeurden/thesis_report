@@ -1,0 +1,118 @@
+\graphicspath{./Images}
+
+\section{Homogenised crushing model}
+In order to describe the mechanical response of the honeycomb, a homogenized phenomenological model is composed. A hypoelastic based plasticity model is made, partially inspired by the formulations as proposed by Mohr \& Doyoyo \cite{mohrdoyoyo2004a} and the extensions to that model as proposed by Van Iersel \cite{DAP}. Since the material model should be suitable for large deformations, a finite deformation framework is proposed which is based on a constitutive relation in rate format.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsection{Objective rates}
+\subsubsection{Objectivity}
+According to the \textit{principle of material frame-indifference}, the state of stress in a material must not change if the body undergoes a rigid transformation. In order to achieve this, an objective constitutive relation must be used to describe the state of the body.\\
+\newline
+Consider a combination of rigid translation $\vec{c}(t)$ and rigid rotation $\boldsymbol{Q}(t)$ of a body, such that the position vector of a point $\vec{x}$ in the domain is transformed into $\vec{x}^+$ according to the following relation:
+\begin{equation}\label{Ch3_rigidmotion}
+    \vec{x}^+ = \vec{c}(t)+\boldsymbol{Q}(t)\cdot\vec{x}
+\end{equation}
+A tensor $\boldsymbol{A}$ that, under influence of this rigid body transformation, is called 'objective' if it transforms according to 
+\begin{equation}
+    \boldsymbol{A}^+=\boldsymbol{Q}\cdot\boldsymbol{A}\cdot\boldsymbol{Q}^T.
+\end{equation}
+The Cauchy stress tensor is an example of an objective tensor, since:
+\begin{equation}
+    \boldsymbol{\sigma}^+=\boldsymbol{Q}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{Q}^T.
+\end{equation}
+For the objective rate format of the constitutive equation, an objective stress rate is required. If we take the material derivative of the Cauchy stress, it becomes clear that it is not objective:
+\begin{equation}
+\begin{split}
+    \dot{\boldsymbol{\sigma}^+}=& \;\dot{\boldsymbol{Q}}\cdot\boldsymbol{\sigma}\cdot\boldsymbol{Q}^T+\boldsymbol{Q}\cdot\dot{\boldsymbol{\sigma}}\cdot\boldsymbol{Q}^T+\boldsymbol{Q}\cdot\boldsymbol{\sigma}\cdot\dot{\boldsymbol{Q}^T}\\
+    \neq& \; \boldsymbol{Q}\cdot\dot{\boldsymbol{\sigma}}\cdot\boldsymbol{Q}^T.
+\end{split}
+\end{equation}
+Thus, an alternative stress rate must be used. Typically, an objective stress rate is found by a so-called pull-back push-forward procedure, defined by the following three steps:
+\begin{enumerate}
+    \item Pull-back: The stress tensor is mapped into an invariant tensor.
+    \item The time derivative of the invariant stress is calculated.
+    \item Push-forward: The time derivative of the invariant stress is mapped to the current configuration, using the inverse transformation of the pull-back step.
+\end{enumerate}
+An example of an objective stress rate is the Lie-derivative of the Cauchy stress tensor, as defined in Equation \ref{Ch3_liederivative}. This objective stress rate is obtained by a pull-back to the undeformed (reference) configuration and a subsequent push-forward to the current configuration. Appendix A describes the pull-back push-forward procedure in detail. {\color{red}{CREATE APPENDIX A WITH PULL BACK PUSH FORWARD}}. 
+\begin{equation}\label{Ch3_liederivative}
+    \acctriang{\boldsymbol{\sigma}} = \dot{\boldsymbol{\sigma}}-\boldsymbol{L}\cdot\boldsymbol{\sigma}-\boldsymbol{\sigma}\cdot\boldsymbol{L}^T.
+\end{equation}
+In this equation, the symbol $\boldsymbol{L}$ represents the velocity gradient, defined by $\boldsymbol{L}=\dot{\boldsymbol{F}}\cdot\boldsymbol{F}^{-1}$.
+
+
+\subsubsection{Constitutive relation in rate format}
+In Appendix B {\color{red}{Create APPENDIX B}} it is shown, based on formulations in Chaves \cite{chaves}, that the combination of the Lie derivative of the Cauchy stress tensor $\acctriang{\boldsymbol{\sigma}}$ together with the fourth order spatial elasticity tensor $\boldsymbol{\mathbb L}$ (defined in the current configuration) forms a suitable pair for a constitutive rate equation of the form:
+\begin{equation}\label{Ch3_objrate}
+    \acctriang{\boldsymbol{\sigma}} = \frac{1}{J}\;\boldsymbol{\mathbb L}:\boldsymbol{D}.
+\end{equation}
+
+In this equation, $J$ is the volume ratio defined as $J=\text{det}(\boldsymbol{F})$, and $\boldsymbol{D}$ is the rate of deformation tensor defined as:
+\begin{equation}
+\boldsymbol{D}=\frac{1}{2}\Big(\boldsymbol{L}+\boldsymbol{L}^T\Big) \quad\text{with}\quad \boldsymbol{L}=\dot{\boldsymbol{F}}\cdot\boldsymbol{F}^{-1}.
+\end{equation}
+
+The spatial elasticity tensor $\boldsymbol{\mathbb{L}}$ relates to the material elastic tensor $\boldsymbol{\mathbb C}$ (defined in the reference configuration) through:
+\begin{equation}\label{Ch3_CL}
+\boldsymbol{\mathbb{L}} = (\boldsymbol{F}\overline{\otimes}\boldsymbol{F}):\boldsymbol{\mathbb C}:(\boldsymbol{F}^T\underline{\otimes}\boldsymbol{F}^T) \quad \text{or} \quad \mathbb L_{ijkl} = F_{im}F_{jn}\mathbb C_{mnpq}F_{kp}F_{lq}.
+\end{equation}
+
+To distinguish between elastic and plastic deformation, the multiplicative split of the deformation gradient $\boldsymbol{F}$ as proposed by Lee \cite{Lee} is used. The deformation gradient is split into an elastic part and a plastic part:
+\begin{equation}\label{Ch3_lee}
+    \boldsymbol{F}=\boldsymbol{F}^e\cdot\boldsymbol{F}^p. 
+\end{equation}
+
+As described by De Souza Neto et al.\cite{compmethodsplasticity}{\color{red}{check this reference}}, a hypoelastic-based plasticity model can be defined by:
+\begin{equation}\label{Ch3_objrate1}
+    \acctriang{\boldsymbol{\sigma}} = \frac{1}{J}\;\boldsymbol{\mathbb L}:(\boldsymbol{D}-\boldsymbol{D}^p),
+\end{equation}
+where $\boldsymbol{D}^p$ is the rate of plastic deformation, defined by:
+\begin{equation}
+\boldsymbol{D}^p = \frac{1}{2}\Big(\boldsymbol{L}^p+(\boldsymbol{L}^p)^T\Big)\quad \text{with} \quad  \boldsymbol{L}^p=\dot{\boldsymbol{F}^p}\cdot(\boldsymbol{F}^p)^{-1}.
+\end{equation}
+
+Appendix B.2 {\color{red}{check reference}} describes how the constitutive rate equation in \label{Ch3_objrate1} can be integrated incrementally, for application in an FEM code. 
+
+
+
+
+
+\url{https://www.continuummechanics.org/corotationalderivative.html}
+\subsection{Elastic response}
+To calculate the constitutive behaviour, first we will define the Voigt notation of the Cauchy stress tensor $\boldsymbol{\sigma}$ and the deformation rate tensor $\boldsymbol{D}$ as follows:
+\begin{equation}
+\begin{split}
+\boldsymbol{\sigma}&=\begin{bmatrix}
+\sigma_{TT} & \sigma_{LL} & \sigma_{WW} & \sigma_{TL} & \sigma_{LW} & \sigma_{TW}
+\end{bmatrix}^T\\
+\boldsymbol{D}&=\begin{bmatrix}
+D_{TT} & D_{LL} & D_{WW} & D_{TL} & D_{LW} & D_{TW}
+\end{bmatrix}^T.
+\end{split}
+\end{equation}
+
+The material is assumed to be orthotropic. Thus, the material elasticity tensor $\boldsymbol{\mathbb C}$ (defined in the undeformed configuration) will be defined by the following tensor in Voigt format:
+\begin{equation}
+\boldsymbol{\mathbb C}=\begin{bmatrix}
+\frac{1-\nu_{LW}\nu_{WL}}{\Delta}E_{TT} & \frac{\nu_{TL}\nu_{TW}\nu_{WL}}{\Delta}E_{LL} & \frac{\nu_{LW}\nu_{LT}\nu_{TW}}{\Delta}E_{WW} & 0 & 0 & 0\\ 
+ & \frac{1-\nu_{TW}\nu_{TW}}{\Delta}E_{LL} & \frac{\nu_{TW}\nu_{TL}\nu_{LW}}{\Delta}E_{WW} & 0 & 0 & 0\\ 
+ &  & \frac{1-\nu_{TL}\nu_{LT}}{\Delta}E_{WW} & 0 & 0 & 0 \\ 
+ & \text{symm.} &  & 2G_{LW} & 0 & 0\\ 
+ &  &   &  & 2G_{TW} & 0\\ 
+ &  &  &  &  & 2G_{TL}
+\end{bmatrix}
+\end{equation} 
+With:
+\begin{equation}
+    \Delta = 1-\nu_{TL}\nu_{LT}-\nu_{LW}\nu_{WL}-\nu_{WT}\nu_{TW}-2\nu_{WL}\nu_{LT}\nu_{TW}
+\end{equation}
+
+
+
+\subsection{Plastic response}
+\subsection{Results}
